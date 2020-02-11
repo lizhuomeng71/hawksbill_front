@@ -17,6 +17,12 @@ class taskApi {
       .catch(error => (error));
   }
 
+  static readTaskSubTaskList(id) {
+    return axios.get(`${ApiConf.API_SERVER_ADDRESS}/tasks/${id}/sub_task`)
+      .then(response => (response))
+      .catch(error => (error));
+  }
+
   static createTask(data) {
     return axios.post(`${ApiConf.API_SERVER_ADDRESS}/tasks`, data)
       .then(response => (response))

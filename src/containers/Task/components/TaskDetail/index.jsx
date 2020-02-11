@@ -12,21 +12,23 @@ import TaskList from '../TaskList';
 export default class TaskDetail extends PureComponent {
   static propTypes = {
     item: PropTypes.shape({ name: PropTypes.string }).isRequired,
-    taskList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
+    subtaskList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
     match: PropTypes.shape({
       params: PropTypes.shape({
         id: PropTypes.string.isRequired,
       }),
     }).isRequired,
     onReadTask: PropTypes.func.isRequired,
+    onReadTaskSubTaskList: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
     const {
       match: { params },
     } = this.props;
-    const { onReadTask } = this.props;
+    const { onReadTask, onReadTaskSubTaskList } = this.props;
     onReadTask(params.id);
+    onReadTaskSubTaskList(params.id);
   }
 
   componentDidUpdate(prevProps) {
@@ -34,16 +36,18 @@ export default class TaskDetail extends PureComponent {
       match: { params },
     } = this.props;
     if (params.id !== prevProps.match.params.id) {
-      const { onReadTask } = this.props;
+      const { onReadTask, onReadTaskSubTaskList } = this.props;
       onReadTask(params.id);
+      onReadTaskSubTaskList(params.id);
     }
   }
 
   render() {
     const {
       item,
+      subtaskList,
     } = this.props;
-    const { taskList } = this.props;
+    console.log(subtaskList);
     return (
       <Row>
         <Col lg="4" md="12">
@@ -58,7 +62,7 @@ export default class TaskDetail extends PureComponent {
         </Col>
         <Col lg="12">
           <TaskList
-            taskList={item.subTasks}
+            taskList={subtaskList}
             title="Sub Task List"
             addLink="/task/add"
           />

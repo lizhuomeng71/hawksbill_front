@@ -22,7 +22,6 @@ class TaskList extends PureComponent {
   render() {
     const {
       taskList,
-      item,
       handleDeleteTask,
       title,
       addLink,
@@ -48,9 +47,9 @@ class TaskList extends PureComponent {
                   </thead>
                   <tbody>
                     {taskList
-                      .map((eachItem) => {
+                      .map((item) => {
                         return (
-                          <TaskRow item={eachItem} handleDeleteTask={handleDeleteTask} key={eachItem.id} />
+                          <TaskRow item={item} handleDeleteTask={handleDeleteTask} key={item._id} />
                         );
                       })}
                   </tbody>

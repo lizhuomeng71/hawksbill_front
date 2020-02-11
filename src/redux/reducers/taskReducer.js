@@ -2,6 +2,7 @@ import update from 'immutability-helper';
 import {
   READ_TASK_LIST_SUCCESS,
   READ_TASK_SUCCESS,
+  READ_TASK_SUBTASK_LIST_SUCCESS,
   CREATE_TASK_SUCCESS,
   DELETE_TASK_SUCCESS,
 } from '../actions/taskActions';
@@ -9,6 +10,7 @@ import {
 const initialState = {
   list: [],
   item: {},
+  subtaskList: [],
 };
 
 export default function (state = initialState, action) {
@@ -24,6 +26,12 @@ export default function (state = initialState, action) {
       return update(
         state, {
           item: { $set: action.payload },
+        },
+      );
+    case READ_TASK_SUBTASK_LIST_SUCCESS:
+      return update(
+        state, {
+          subtaskList: { $set: action.payload },
         },
       );
     case DELETE_TASK_SUCCESS:

@@ -44,14 +44,15 @@ class DepartmentForm extends PureComponent {
                     />
                   </Col>
                 </Row>
-
                 <Row>
                   <Col lg="12">
                     <ButtonToolbar className="form__button-toolbar">
-                      <Button color="primary" type="submit">Submit</Button>
+                      <Button color="primary" type="submit">
+                        Submit
+                      </Button>
                       &nbsp;
                       <Button color="secondary" type="button" onClick={reset}>
-                            Cancel
+                        Cancel
                       </Button>
                     </ButtonToolbar>
                   </Col>

@@ -39,8 +39,38 @@ class PersonRow extends PureComponent {
         <td>
           <span>+ 264-625-2583</span>
         </td>
-        <td>24 Jun, 2015</td>
-        <td>Web Designer</td>
+        <td>
+          <img
+            src="../assets/images/xs/avatar3.jpg"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Team Lead"
+            alt="Avatar"
+            className="width35 rounded"
+          />
+        </td>
+        <td>
+          <ul className="list-unstyled team-info">
+            <li>
+              <img
+                src="../assets/images/xs/avatar2.jpg"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Avatar"
+                alt="Avatar"
+              />
+            </li>
+            <li>
+              <img
+                src="../assets/images/xs/avatar3.jpg"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Avatar"
+                alt="Avatar"
+              />
+            </li>
+          </ul>
+        </td>
         <td>
           <NavLink to={'/department/' + item._id} className="btn btn-sm btn-outline-primary">
             <i className="icon-eye" />

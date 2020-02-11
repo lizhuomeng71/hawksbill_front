@@ -9,6 +9,9 @@ export const READ_TASK_LIST_FAIL = 'READ_TASK_LIST_FAIL';
 export const READ_TASK_BEGIN = 'READ_TASK_BEGIN';
 export const READ_TASK_SUCCESS = 'READ_TASK_SUCCESS';
 export const READ_TASK_FAIL = 'READ_TASK_FAIL';
+export const READ_TASK_SUBTASK_LIST_BEGIN = 'READ_TASK_SUBTASK_LIST_BEGIN';
+export const READ_TASK_SUBTASK_LIST_SUCCESS = 'READ_TASK_SUBTASK_LIST_SUCCESS';
+export const READ_TASK_SUBTASK_LIST_FAIL = 'READ_TASK_SUBTASK_LIST_FAIL';
 export const CREATE_TASK_BEGIN = 'CREATE_TASK_BEGIN';
 export const CREATE_TASK_SUCCESS = 'CREATE_TASK_SUCCESS';
 export const CREATE_TASK_FAIL = 'CREATE_TASK_FAIL';
@@ -84,6 +87,42 @@ export function readTask(id) {
 }
 
 /* Read Task List End */
+
+
+/* Read Task Sub Task Start */
+function readTaskSubTaskListBegin() {
+  return { type: READ_TASK_SUBTASK_LIST_BEGIN };
+}
+
+function readTaskSubTaskListSuccess(data) {
+  return { type: READ_TASK_SUBTASK_LIST_SUCCESS, payload: data };
+}
+
+function readTaskSubTaskListFail(data) {
+  return { type: READ_TASK_SUBTASK_LIST_FAIL, payload: data };
+}
+
+export function readTaskSubTaskList(id) {
+  return (dispatch) => {
+    dispatch(readTaskSubTaskListBegin());
+    return taskApi.readTaskSubTaskList(id).then((response) => {
+      switch (response.status) {
+        case HttpStatus.OK:
+          dispatch(readTaskSubTaskListSuccess(response.data));
+          break;
+        case HttpStatus.BAD_REQUEST:
+          dispatch(readTaskSubTaskListFail(response.data));
+          break;
+        default:
+      }
+      return {};
+    }).catch((error) => {
+      throw (error);
+    });
+  };
+}
+
+/* Read Task Sub Task End */
 
 /* Add Task Start */
 function createTaskBegin() {

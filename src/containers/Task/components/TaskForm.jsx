@@ -274,7 +274,9 @@ class TaskForm extends PureComponent {
                 <Row>
                   <Col lg="12">
                     <ButtonToolbar className="form__button-toolbar">
-                      <Button color="primary" type="submit">Submit</Button>
+                      <Button color="primary" type="submit">
+                        Submit
+                      </Button>
                       &nbsp;
                       <Button color="secondary" type="button" onClick={reset}>
                             Cancel
@@ -293,10 +295,10 @@ class TaskForm extends PureComponent {
 }
 
 function mapStateToProps(state, ownProps) {
-  let parentId = state.task.item._key ? state.task.item._key : 0;
+  let parentId = state.task.item._id ? state.task.item._id : 0;
   return {
     initialValues: {
-      parent: parentId
+      parent_task: parentId
     }
   }
 }
