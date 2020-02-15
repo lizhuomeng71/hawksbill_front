@@ -8,11 +8,13 @@ import TaskAssignment from './components/TaskAssignment';
 import TaskActivity from './components/TaskActivity';
 import TaskTimeLine from './components/TaskTimeLine';
 import TaskList from '../TaskList';
+import ReviewContainer from '../../../Review';
 
 export default class TaskDetail extends PureComponent {
   static propTypes = {
     item: PropTypes.shape({ name: PropTypes.string }).isRequired,
     subtaskList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
+    reviewList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
     match: PropTypes.shape({
       params: PropTypes.shape({
         id: PropTypes.string.isRequired,
@@ -20,15 +22,17 @@ export default class TaskDetail extends PureComponent {
     }).isRequired,
     onReadTask: PropTypes.func.isRequired,
     onReadTaskSubTaskList: PropTypes.func.isRequired,
+    onReadReviewList: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
     const {
       match: { params },
     } = this.props;
-    const { onReadTask, onReadTaskSubTaskList } = this.props;
+    const { onReadTask, onReadTaskSubTaskList, onReadReviewList } = this.props;
     onReadTask(params.id);
     onReadTaskSubTaskList(params.id);
+    onReadReviewList(params.id);
   }
 
   componentDidUpdate(prevProps) {
@@ -36,9 +40,10 @@ export default class TaskDetail extends PureComponent {
       match: { params },
     } = this.props;
     if (params.id !== prevProps.match.params.id) {
-      const { onReadTask, onReadTaskSubTaskList } = this.props;
+      const { onReadTask, onReadTaskSubTaskList, onReadReviewList } = this.props;
       onReadTask(params.id);
       onReadTaskSubTaskList(params.id);
+      onReadReviewList(params.id);
     }
   }
 
@@ -46,6 +51,7 @@ export default class TaskDetail extends PureComponent {
     const {
       item,
       subtaskList,
+      reviewList,
     } = this.props;
     console.log(subtaskList);
     return (
@@ -54,6 +60,7 @@ export default class TaskDetail extends PureComponent {
           <TaskMain item={item} />
           <TaskBudget />
           <TaskTeam />
+          <ReviewContainer />
           <TaskAssignment />
         </Col>
         <Col lg="8" md="12">

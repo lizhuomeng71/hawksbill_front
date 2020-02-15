@@ -17,6 +17,9 @@ import {
   readPersonList,
 } from '../../redux/actions/personActions';
 import {
+  readReviewList,
+} from '../../redux/actions/reviewActions';
+import {
   readRoleList,
 } from '../../redux/actions/roleActions';
 import TaskList from './components/TaskList';
@@ -31,6 +34,7 @@ class Task extends PureComponent {
     roleList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
     departmentList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
     subtaskList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
+    reviewList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
     item: PropTypes.shape({ name: PropTypes.string }).isRequired,
     handleCreateTask: PropTypes.func.isRequired,
     handleEditTask: PropTypes.func.isRequired,
@@ -41,6 +45,7 @@ class Task extends PureComponent {
     onReadRoleList: PropTypes.func.isRequired,
     onReadTask: PropTypes.func.isRequired,
     onReadTaskSubTaskList: PropTypes.func.isRequired,
+    onReadReviewList: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -52,6 +57,7 @@ class Task extends PureComponent {
     const {
       taskList,
       subtaskList,
+      reviewList,
       personList,
       departmentList,
       roleList,
@@ -59,6 +65,7 @@ class Task extends PureComponent {
       onReadTask,
       onReadTaskSubTaskList,
       onReadTaskList,
+      onReadReviewList,
       onReadPersonList,
       onReadDepartmentList,
       onReadRoleList,
@@ -110,8 +117,10 @@ class Task extends PureComponent {
                 {...props}
                 onReadTask={onReadTask}
                 onReadTaskSubTaskList={onReadTaskSubTaskList}
+                onReadReviewList={onReadReviewList}
                 item={item}
                 subtaskList={subtaskList}
+                reviewList={reviewList}
               />
             )}
           />
@@ -125,6 +134,7 @@ function mapStateToProps(stateProps, ownProps) {
   return {
     taskList: stateProps.task.list,
     subtaskList: stateProps.task.subtaskList,
+    reviewList: stateProps.task.reviews,
     item: stateProps.task.item,
     personList: stateProps.person.list,
     departmentList: stateProps.department.list,
@@ -151,6 +161,9 @@ function mapDispatchToProps(dispatch, dispatchProps) {
     },
     onReadTaskSubTaskList(id) {
       return dispatch(readTaskSubTaskList(id));
+    },
+    onReadReviewList(id) {
+      return dispatch(readReviewList(id));
     },
     handleCreateTask(data) {
       return dispatch(createTask(data));

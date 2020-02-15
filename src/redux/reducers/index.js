@@ -8,6 +8,7 @@ import personReducer from './personReducer';
 import departmentReducer from './departmentReducer';
 import roleReducer from './roleReducer';
 import taskReducer from './taskReducer';
+import reviewReducer from './reviewReducer';
 
 
 const reducer = history => combineReducers({
@@ -19,6 +20,7 @@ const reducer = history => combineReducers({
   department: departmentReducer,
   role: roleReducer,
   task: taskReducer,
+  review: reviewReducer,
 });
 
 export default reducer;

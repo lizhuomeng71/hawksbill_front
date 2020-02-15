@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 
@@ -7,23 +8,25 @@ class ListHeader extends PureComponent {
   static propTypes = {
     title: PropTypes.string.isRequired,
     addNewLink: PropTypes.string.isRequired,
+    handleOnClickForAddButton: PropTypes.func.isRequired,
   };
 
   render() {
-    const { title, addNewLink } = this.props;
+    const { title, addNewLink, handleOnClickForAddButton } = this.props;
 
     return (
       <div className="header">
         <h2>{title}</h2>
         <ul className="header-dropdown">
           <li>
-            <NavLink
+            <Button
               className="btn btn-info"
-              to={addNewLink}
+              onClick={handleOnClickForAddButton}
             >
               Add New
-            </NavLink>
+            </Button>
           </li>
+
         </ul>
       </div>
     );

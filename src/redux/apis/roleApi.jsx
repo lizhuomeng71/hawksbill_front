@@ -6,7 +6,7 @@ import * as ApiConf from '../../shared/constants/ApiConf';
 
 class RoleApi {
   static readRoleList(departmentId) {
-    let endPoint = `${ApiConf.API_SERVER_ADDRESS}/api/roles`;
+    let endPoint = `${ApiConf.API_SERVER_ADDRESS}/roles`;
     if (departmentId) {
       endPoint = `${endPoint}?department=${departmentId}`;
     }
@@ -16,19 +16,19 @@ class RoleApi {
   }
 
   static readRole(id) {
-    return axios.get(`${ApiConf.API_SERVER_ADDRESS}/api/roles/${id}`)
+    return axios.get(`${ApiConf.API_SERVER_ADDRESS}/roles/${id}`)
       .then(response => (response))
       .catch(error => (error));
   }
 
   static createRole(data) {
-    return axios.post(`${ApiConf.API_SERVER_ADDRESS}/api/roles`, data)
+    return axios.post(`${ApiConf.API_SERVER_ADDRESS}/roles`, data)
       .then(response => (response))
       .catch(error => (error));
   }
 
   static deleteRole(key) {
-    return axios.delete(`${ApiConf.API_SERVER_ADDRESS}/api/roles/${key}`)
+    return axios.delete(`${ApiConf.API_SERVER_ADDRESS}/roles/${key}`)
       .then(response => (response))
       .catch(error => (error));
   }
