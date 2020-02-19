@@ -82,13 +82,13 @@ class Review extends PureComponent {
       case 'add':
         components = (
           <ReviewForm
+            onSubmit={handleCreateReview}
             onReadReviewList={onReadReviewList}
             onReadPersonList={onReadPersonList}
             onReadDepartmentList={onReadDepartmentList}
             reviewList={reviewList}
             personList={personList}
             handleDeleteReview={handleDeleteReview}
-            addLink="/review/add"
             title="Review List"
           />
         );
@@ -137,7 +137,6 @@ function mapDispatchToProps(dispatch, dispatchProps) {
       return dispatch(deleteReview(id));
     },
     handleOnClickForAddButton() {
-      console.log('add');
       return dispatch(changeReviewPageState('add'));
     },
   };

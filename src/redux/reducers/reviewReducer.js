@@ -10,7 +10,7 @@ import {
 const initialState = {
   list: [],
   item: {},
-  currentPageState: 'add',
+  currentPageState: 'list',
 };
 
 export default function (state = initialState, action) {
@@ -33,6 +33,13 @@ export default function (state = initialState, action) {
       return update(
         state, {
           list: { $splice: [[index, 1]] },
+        },
+      );
+    case CREATE_REVIEW_SUCCESS:
+      index = state.list.findIndex(i => i._key === action.payload);
+      return update(
+        state, {
+          currentPageState: { $set: action.payload },
         },
       );
     case CHANGE_REVIEW_PAGE_STATE:

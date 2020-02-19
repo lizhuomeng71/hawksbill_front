@@ -146,7 +146,6 @@ export function createReview(data) {
       switch (response.status) {
         case HttpStatus.CREATED:
           dispatch(createReviewSuccess(response.data));
-          dispatch(push('/review/'));
           break;
         case HttpStatus.BAD_REQUEST:
           dispatch(createReviewFail(response.data));

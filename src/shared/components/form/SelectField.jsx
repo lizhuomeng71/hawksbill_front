@@ -46,7 +46,7 @@ class SelectField extends PureComponent {
           <option>{placeholder}</option>
           {options.map(
             (option) => {
-              return (<option value={option._key} key={option._key}>{option.name}</option>);
+              return (<option value={option._id} key={option._id}>{option.name}</option>);
             },
           )}
         </select>
