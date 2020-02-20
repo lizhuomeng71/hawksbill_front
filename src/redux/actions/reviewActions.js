@@ -178,7 +178,7 @@ export function deleteReview(key) {
     dispatch(deleteReviewBegin());
     return reviewApi.deleteReview(key).then((response) => {
       switch (response.status) {
-        case HttpStatus.NO_CONTENT:
+        case HttpStatus.OK:
           dispatch(deleteReviewSuccess(key));
           break;
         case HttpStatus.BAD_REQUEST:

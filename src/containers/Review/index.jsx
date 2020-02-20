@@ -31,6 +31,7 @@ class Review extends PureComponent {
     roleList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
     departmentList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
     item: PropTypes.shape({ name: PropTypes.string }).isRequired,
+    task: PropTypes.shape({ name: PropTypes.string }).isRequired,
     currentPageState: PropTypes.string.isRequired,
     handleCreateReview: PropTypes.func.isRequired,
     handleEditReview: PropTypes.func.isRequired,
@@ -55,6 +56,7 @@ class Review extends PureComponent {
       departmentList,
       roleList,
       item,
+      task,
       currentPageState,
       onReadReview,
       onReadReviewList,
@@ -89,6 +91,7 @@ class Review extends PureComponent {
             reviewList={reviewList}
             personList={personList}
             handleDeleteReview={handleDeleteReview}
+            task={task}
             title="Review List"
           />
         );
@@ -101,6 +104,7 @@ class Review extends PureComponent {
 
 function mapStateToProps(stateProps, ownProps) {
   return {
+    task: stateProps.task.item,
     reviewList: stateProps.review.list,
     item: stateProps.review.item,
     currentPageState: stateProps.review.currentPageState,

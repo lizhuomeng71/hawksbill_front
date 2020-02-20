@@ -29,7 +29,10 @@ export default function (state = initialState, action) {
         },
       );
     case DELETE_REVIEW_SUCCESS:
-      index = state.list.findIndex(i => i._key === action.payload);
+      index = state.list.findIndex(i => i._id === action.payload);
+      console.log(state.list);
+      console.log(action.payload);
+      console.log(index);
       return update(
         state, {
           list: { $splice: [[index, 1]] },
@@ -39,7 +42,7 @@ export default function (state = initialState, action) {
       index = state.list.findIndex(i => i._key === action.payload);
       return update(
         state, {
-          currentPageState: { $set: action.payload },
+          currentPageState: { $set: 'list' },
         },
       );
     case CHANGE_REVIEW_PAGE_STATE:

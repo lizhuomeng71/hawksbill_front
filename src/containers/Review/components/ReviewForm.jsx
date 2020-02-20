@@ -144,10 +144,9 @@ class ReviewForm extends PureComponent {
 }
 
 function mapStateToProps(state, ownProps) {
-  let parentId = state.review.item._id ? state.review.item._id : 0;
   return {
     initialValues: {
-      parent_review: parentId
+      parent_task: ownProps.task._id
     }
   }
 }
