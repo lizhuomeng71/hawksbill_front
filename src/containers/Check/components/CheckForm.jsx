@@ -15,34 +15,19 @@ import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 class ReviewForm extends PureComponent {
   static propTypes = {
-    personList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
-    roleList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
-    departmentList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
-    reviewList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
     handleSubmit: PropTypes.func.isRequired,
     reset: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {
-    const { onReadPersonList, onReadRoleList, onReadDepartmentList, onReadReviewList } = this.props;
-  //  onReadDepartmentList();
-    onReadPersonList();
-    onReadReviewList();
+
   }
 
-  handleDepartmentChange(event){
-    let departmentId = event.target.value
-    const { onReadRoleList } = this.props;
-    onReadRoleList(departmentId);
-  }
+
 
   render() {
     const {
-      personList,
-      roleList,
-      reviewList,
-      departmentList,
       handleSubmit,
       reset,
       submitting,
