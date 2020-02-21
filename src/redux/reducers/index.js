@@ -9,6 +9,7 @@ import departmentReducer from './departmentReducer';
 import roleReducer from './roleReducer';
 import taskReducer from './taskReducer';
 import reviewReducer from './reviewReducer';
+import checkReducer from './checkReducer';
 
 
 const reducer = history => combineReducers({
@@ -21,6 +22,8 @@ const reducer = history => combineReducers({
   role: roleReducer,
   task: taskReducer,
   review: reviewReducer,
+  check: checkReducer,
+
 });
 
 export default reducer;

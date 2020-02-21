@@ -15,6 +15,18 @@ class ReviewRow extends PureComponent {
     handleDeleteReview(item._id);
   }
 
+  handleApprove(e) {
+    const { item, handleDeleteReview } = this.props;
+    e.preventDefault();
+    console.log('handleApprove not implemented');
+  }
+
+  handleReject(e) {
+    const { item, handleDeleteReview } = this.props;
+    e.preventDefault();
+    console.log('handleReject not implemented');
+  }
+
 
   render() {
     const { item } = this.props;
@@ -29,20 +41,28 @@ class ReviewRow extends PureComponent {
             </div>
             <div className="media-right">
               <button
-                className="btn btn-sm btn-outline-danger"
+                className="btn btn-sm btn-outline-primary"
                 type="button"
                 onClick={(e) => { this.handleDelete(e); }}
               >
                 <i className="icon-trash" />
               </button>
               &nbsp;
-              <a className="btn btn-sm btn-outline-primary" href="/task/5e3386f8582b9bab821f110b">
-                <i className="icon-eye" />
-              </a>
+              <button
+                className="btn btn-sm btn-outline-success"
+                type="button"
+                onClick={(e) => { this.handleApprove(e); }}
+              >
+                <i className="icon-check" />
+              </button>
               &nbsp;
-              <a className="btn btn-sm btn-outline-primary" href="/task/5e3386f8582b9bab821f110b">
-                <i className="icon-eye" />
-              </a>
+              <button
+                className="btn btn-sm btn-outline-danger"
+                type="button"
+                onClick={(e) => { this.handleReject(e); }}
+              >
+                <i className="icon-ban" />
+              </button>
             </div>
 
 

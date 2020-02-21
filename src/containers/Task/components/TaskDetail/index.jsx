@@ -9,12 +9,12 @@ import TaskActivity from './components/TaskActivity';
 import TaskTimeLine from './components/TaskTimeLine';
 import TaskList from '../TaskList';
 import ReviewContainer from '../../../Review';
+import CheckContainer from '../../../Check';
 
 export default class TaskDetail extends PureComponent {
   static propTypes = {
     item: PropTypes.shape({ name: PropTypes.string }).isRequired,
     subtaskList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
-    reviewList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
     match: PropTypes.shape({
       params: PropTypes.shape({
         id: PropTypes.string.isRequired,
@@ -32,7 +32,6 @@ export default class TaskDetail extends PureComponent {
     const { onReadTask, onReadTaskSubTaskList, onReadReviewList } = this.props;
     onReadTask(params.id);
     onReadTaskSubTaskList(params.id);
-    onReadReviewList(params.id);
   }
 
   componentDidUpdate(prevProps) {
@@ -51,20 +50,20 @@ export default class TaskDetail extends PureComponent {
     const {
       item,
       subtaskList,
-      reviewList,
     } = this.props;
     console.log(subtaskList);
     return (
       <Row>
         <Col lg="4" md="12">
-          <TaskMain item={item} />
+          <TaskActivity />
           <TaskBudget />
           <TaskTeam />
           <ReviewContainer />
           <TaskAssignment />
         </Col>
         <Col lg="8" md="12">
-          <TaskActivity />
+          <TaskMain item={item} />
+          <CheckContainer />
           <TaskTimeLine />
         </Col>
         <Col lg="12">
