@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import SidebarLink from './SidebarLink';
+import SidebarTopLink from './SidebarTopLink';
 import SidebarContent from '../topbar/Topbar';
 
 class Sidebar extends PureComponent {
@@ -121,18 +122,9 @@ class Sidebar extends PureComponent {
                       Events
                     </a>
                   </li>
-                  <li>
-                    <a href="app-activities.html">
-                      <i className="icon-badge" />
-                      Activities
-                    </a>
-                  </li>
-                  <li>
-                    <a href="app-social.html">
-                      <i className="icon-globe" />
-                      HR Social
-                    </a>
-                  </li>
+                  <SidebarTopLink route="/equipment" title="Equipment" iconClass="icon-globe" />
+                  <SidebarTopLink route="/material" title="Material" iconClass="icon-badge" />
+
                   <li>
                     <a href="#Persons" className="has-arrow">
                       <i className="icon-users" />

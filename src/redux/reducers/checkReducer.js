@@ -30,18 +30,15 @@ export default function (state = initialState, action) {
       );
     case DELETE_CHECK_SUCCESS:
       index = state.list.findIndex(i => i._id === action.payload);
-      console.log(state.list);
-      console.log(action.payload);
-      console.log(index);
       return update(
         state, {
           list: { $splice: [[index, 1]] },
         },
       );
     case CREATE_CHECK_SUCCESS:
-      index = state.list.findIndex(i => i._key === action.payload);
       return update(
         state, {
+          list: { $push: [action.payload] },
           currentPageState: { $set: 'list' },
         },
       );

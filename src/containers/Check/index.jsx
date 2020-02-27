@@ -1,8 +1,15 @@
 import React, { PureComponent } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Container, Col, Row } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import {
+  Card,
+  Col,
+  Row,
+  CardBody,
+  Button,
+  Container,
+} from 'reactstrap';
 import {
   readCheckList,
   readCheck,
@@ -19,17 +26,14 @@ import {
 import {
   readRoleList,
 } from '../../redux/actions/roleActions';
-import CheckList from './components/CheckList';
 import CheckForm from './components/CheckForm';
-import CheckDetail from './components/CheckDetail';
 import BlockHeader from '../BlockHeader';
+import ListHeader from '../../shared/components/ListHeader';
+import CheckRow from './components/CheckRow';
 
 class Check extends PureComponent {
   static propTypes = {
     checkList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
-    personList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
-    roleList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
-    departmentList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
     item: PropTypes.shape({ name: PropTypes.string }).isRequired,
     task: PropTypes.shape({ name: PropTypes.string }).isRequired,
     currentPageState: PropTypes.string.isRequired,
@@ -38,9 +42,6 @@ class Check extends PureComponent {
     handleDeleteCheck: PropTypes.func.isRequired,
     handleOnClickForAddButton: PropTypes.func.isRequired,
     onReadCheckList: PropTypes.func.isRequired,
-    onReadPersonList: PropTypes.func.isRequired,
-    onReadDepartmentList: PropTypes.func.isRequired,
-    onReadRoleList: PropTypes.func.isRequired,
     onReadCheck: PropTypes.func.isRequired,
   };
 
@@ -52,44 +53,35 @@ class Check extends PureComponent {
   render() {
     const {
       checkList,
-      personList,
-      departmentList,
-      roleList,
       item,
       task,
       currentPageState,
       onReadCheck,
       onReadCheckList,
-      onReadPersonList,
-      onReadDepartmentList,
-      onReadRoleList,
       handleCreateCheck,
       handleEditCheck,
       handleDeleteCheck,
       handleOnClickForAddButton,
     } = this.props;
+
     let components;
     switch (currentPageState) {
       case 'list':
         components = (
-          <CheckList
-            onReadCheckList={onReadCheckList}
-            checkList={checkList}
-            handleDeleteCheck={handleDeleteCheck}
-            handleOnClickForAddButton={handleOnClickForAddButton}
-            title="Check List"
-          />
+          <Button
+            className="btn btn-info"
+            type="button"
+            onClick={handleOnClickForAddButton}
+          >
+            Add New
+          </Button>
         );
         break;
       case 'add':
         components = (
           <CheckForm
             onSubmit={handleCreateCheck}
-            onReadCheckList={onReadCheckList}
-            onReadPersonList={onReadPersonList}
-            onReadDepartmentList={onReadDepartmentList}
             checkList={checkList}
-            personList={personList}
             handleDeleteCheck={handleDeleteCheck}
             task={task}
             title="Check List"
@@ -98,7 +90,22 @@ class Check extends PureComponent {
         break;
       default:
     }
-    return components;
+    return (
+      <Card>
+        <ListHeader title="Check List" />
+        <CardBody>
+          <ul className="list-unstyled">
+            {checkList
+              .map((checkItem) => {
+                return (
+                  <CheckRow item={checkItem} handleDeleteCheck={handleDeleteCheck} key={checkItem._id} />
+                );
+              })}
+          </ul>
+          {components}
+        </CardBody>
+      </Card>
+    );
   }
 }
 
@@ -108,9 +115,6 @@ function mapStateToProps(stateProps, ownProps) {
     checkList: stateProps.check.list,
     item: stateProps.check.item,
     currentPageState: stateProps.check.currentPageState,
-    personList: stateProps.person.list,
-    departmentList: stateProps.department.list,
-    roleList: stateProps.role.list,
   };
 }
 
@@ -118,15 +122,6 @@ function mapDispatchToProps(dispatch, dispatchProps) {
   return {
     onReadCheckList() {
       return dispatch(readCheckList());
-    },
-    onReadPersonList() {
-      return dispatch(readPersonList());
-    },
-    onReadDepartmentList() {
-      return dispatch(readDepartmentList());
-    },
-    onReadRoleList(id) {
-      return dispatch(readRoleList(id));
     },
     onReadCheck(id) {
       return dispatch(readCheck(id));
@@ -141,6 +136,7 @@ function mapDispatchToProps(dispatch, dispatchProps) {
       return dispatch(deleteCheck(id));
     },
     handleOnClickForAddButton() {
+      console.log('"Clicked"');
       return dispatch(changeCheckPageState('add'));
     },
   };

@@ -26,7 +26,6 @@ class ListHeader extends PureComponent {
               Add New
             </Button>
           </li>
-
         </ul>
       </div>
     );

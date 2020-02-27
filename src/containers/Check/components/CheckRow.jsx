@@ -3,30 +3,23 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import Moment from 'react-moment';
 
-class ReviewRow extends PureComponent {
+class CheckRow extends PureComponent {
   static propTypes = {
     item: PropTypes.shape({ name: PropTypes.string }).isRequired,
-    handleDeleteReview: PropTypes.func.isRequired,
+    handleDeleteCheck: PropTypes.func.isRequired,
   };
 
   handleDelete(e) {
-    const { item, handleDeleteReview } = this.props;
+    const { item, handleDeleteCheck } = this.props;
     e.preventDefault();
-    handleDeleteReview(item._id);
+    handleDeleteCheck(item._id);
   }
 
   handleApprove(e) {
-    const { item, handleDeleteReview } = this.props;
+    const { item, handleDeleteCheck } = this.props;
     e.preventDefault();
     console.log('handleApprove not implemented');
   }
-
-  handleReject(e) {
-    const { item, handleDeleteReview } = this.props;
-    e.preventDefault();
-    console.log('handleReject not implemented');
-  }
-
 
   render() {
     const { item } = this.props;
@@ -34,8 +27,8 @@ class ReviewRow extends PureComponent {
       <li className="clearfix">
         <div className="media">
           <div className="media-left">
-            <label className="fancy-checkbox" htmlFor="aa">
-              <input type="checkbox" name="checkbox" className="checkbox-tick" id="aa" />
+            <label className="fancy-checkbox" htmlFor={item._id}>
+              <input type="checkbox" name="checkbox" className="checkbox-tick" id={item._id} />
               <span />
             </label>
           </div>
@@ -51,22 +44,6 @@ class ReviewRow extends PureComponent {
             >
               <i className="icon-trash" />
             </button>
-            &nbsp;
-            <button
-              className="btn btn-sm btn-outline-success"
-              type="button"
-              onClick={(e) => { this.handleApprove(e); }}
-            >
-              <i className="icon-check" />
-            </button>
-            &nbsp;
-            <button
-              className="btn btn-sm btn-outline-danger"
-              type="button"
-              onClick={(e) => { this.handleReject(e); }}
-            >
-              <i className="icon-ban" />
-            </button>
           </div>
         </div>
       </li>
@@ -74,4 +51,4 @@ class ReviewRow extends PureComponent {
   }
 }
 
-export default ReviewRow;
+export default CheckRow;
