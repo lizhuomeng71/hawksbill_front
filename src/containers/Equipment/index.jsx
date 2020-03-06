@@ -5,53 +5,53 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import {
-  readPersonList,
-  readPerson,
-  createPerson,
-  deletePerson,
-  changePersonPageState,
-} from '../../redux/actions/personActions';
+  readEquipmentList,
+  readEquipment,
+  createEquipment,
+  deleteEquipment,
+  changeEquipmentPageState,
+} from '../../redux/actions/equipmentActions';
 import {
   readDepartmentList,
 } from '../../redux/actions/departmentActions';
 import {
   readRoleList,
 } from '../../redux/actions/roleActions';
-import PersonList from './components/PersonList';
-import PersonForm from './components/PersonForm';
+import EquipmentList from './components/EquipmentList';
+import EquipmentForm from './components/EquipmentForm';
 import BlockHeader from '../BlockHeader';
 
 
-class Person extends PureComponent {
+class Equipment extends PureComponent {
   static propTypes = {
     list: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
     item: PropTypes.shape({ name: PropTypes.string }).isRequired,
     roleList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
-    handleCreatePerson: PropTypes.func.isRequired,
-    handleEditPerson: PropTypes.func.isRequired,
-    handleDeletePerson: PropTypes.func.isRequired,
+    handleCreateEquipment: PropTypes.func.isRequired,
+    handleEditEquipment: PropTypes.func.isRequired,
+    handleDeleteEquipment: PropTypes.func.isRequired,
     handleOnClickForAddButton: PropTypes.func.isRequired,
     currentPageState: PropTypes.string.isRequired,
-    onReadPersonList: PropTypes.func.isRequired,
+    onReadEquipmentList: PropTypes.func.isRequired,
     onReadDepartmentList: PropTypes.func.isRequired,
     departmentList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
     onReadRoleList: PropTypes.func.isRequired,
-    onReadPerson: PropTypes.func.isRequired,
+    onReadEquipment: PropTypes.func.isRequired,
   };
 
   render() {
     const {
       list,
       item,
-      onReadPerson,
-      handleCreatePerson,
-      onReadPersonList,
+      onReadEquipment,
+      handleCreateEquipment,
+      onReadEquipmentList,
       onReadDepartmentList,
       departmentList,
       onReadRoleList,
       roleList,
-      handleEditPerson,
-      handleDeletePerson,
+      handleEditEquipment,
+      handleDeleteEquipment,
       handleOnClickForAddButton,
       currentPageState,
     } = this.props;
@@ -60,23 +60,23 @@ class Person extends PureComponent {
     switch (currentPageState) {
       case 'list':
         components = (
-          <PersonList
-            onReadPersonList={onReadPersonList}
+          <EquipmentList
+            onReadEquipmentList={onReadEquipmentList}
             list={list}
             handleOnClickForAddButton={handleOnClickForAddButton}
-            handleDeletePerson={handleDeletePerson}
+            handleDeleteEquipment={handleDeleteEquipment}
           />
         );
         break;
       case 'add':
         components = (
-          <PersonForm
+          <EquipmentForm
             onReadDepartmentList={onReadDepartmentList}
             departmentList={departmentList}
             onReadRoleList={onReadRoleList}
             roleList={roleList}
-            onSubmit={handleCreatePerson}
-            handleDeletePerson={handleDeletePerson}
+            onSubmit={handleCreateEquipment}
+            handleDeleteEquipment={handleDeleteEquipment}
           />
         );
         break;
@@ -85,7 +85,7 @@ class Person extends PureComponent {
 
     return (
       <Container>
-        <BlockHeader title="Person" />
+        <BlockHeader title="Equipment" />
         <Row>
           <Col lg={12}>
             {components}
@@ -98,18 +98,18 @@ class Person extends PureComponent {
 
 function mapStateToProps(stateProps, ownProps) {
   return {
-    list: stateProps.person.list,
+    list: stateProps.equipment.list,
     departmentList: stateProps.department.list,
-    currentPageState: stateProps.person.currentPageState,
+    currentPageState: stateProps.equipment.currentPageState,
     roleList: stateProps.role.list,
-    item: stateProps.person.item,
+    item: stateProps.equipment.item,
   };
 }
 
 function mapDispatchToProps(dispatch, dispatchProps) {
   return {
-    onReadPersonList() {
-      return dispatch(readPersonList());
+    onReadEquipmentList() {
+      return dispatch(readEquipmentList());
     },
     onReadDepartmentList() {
       return dispatch(readDepartmentList());
@@ -117,20 +117,20 @@ function mapDispatchToProps(dispatch, dispatchProps) {
     onReadRoleList(departmentId) {
       return dispatch(readRoleList(departmentId));
     },
-    onReadPerson(id) {
-      return dispatch(readPerson(id));
+    onReadEquipment(id) {
+      return dispatch(readEquipment(id));
     },
-    handleCreatePerson(data) {
-      return dispatch(createPerson(data));
+    handleCreateEquipment(data) {
+      return dispatch(createEquipment(data));
     },
-    handleEditPerson(data) {
-      return dispatch(createPerson(data));
+    handleEditEquipment(data) {
+      return dispatch(createEquipment(data));
     },
-    handleDeletePerson(id) {
-      return dispatch(deletePerson(id));
+    handleDeleteEquipment(id) {
+      return dispatch(deleteEquipment(id));
     },
     handleOnClickForAddButton() {
-      return dispatch(changePersonPageState('add'));
+      return dispatch(changeEquipmentPageState('add'));
     },
   };
 }
@@ -143,4 +143,4 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Person);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Equipment);

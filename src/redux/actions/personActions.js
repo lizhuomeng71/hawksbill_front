@@ -15,6 +15,8 @@ export const CREATE_PERSON_FAIL = 'CREATE_PERSON_FAIL';
 export const DELETE_PERSON_BEGIN = 'DELETE_PERSON_BEGIN';
 export const DELETE_PERSON_SUCCESS = 'DELETE_PERSON_SUCCESS';
 export const DELETE_PERSON_FAIL = 'DELETE_PERSON_FAIL';
+export const CHANGE_PERSON_PAGE_STATE = 'CHANGE_PERSON_PAGE_STATE';
+
 
 /* Read PERSON List Start */
 function readPersonListBegin() {
@@ -152,3 +154,7 @@ export function deletePerson(key) {
   };
 }
 /* Delete PERSON List End */
+
+export function changePersonPageState(data) {
+  return { type: CHANGE_PERSON_PAGE_STATE, payload: data };
+}

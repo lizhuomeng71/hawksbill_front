@@ -5,53 +5,53 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import {
-  readPersonList,
-  readPerson,
-  createPerson,
-  deletePerson,
-  changePersonPageState,
-} from '../../redux/actions/personActions';
+  readMaterialList,
+  readMaterial,
+  createMaterial,
+  deleteMaterial,
+  changeMaterialPageState,
+} from '../../redux/actions/materialActions';
 import {
   readDepartmentList,
 } from '../../redux/actions/departmentActions';
 import {
   readRoleList,
 } from '../../redux/actions/roleActions';
-import PersonList from './components/PersonList';
-import PersonForm from './components/PersonForm';
+import MaterialList from './components/MaterialList';
+import MaterialForm from './components/MaterialForm';
 import BlockHeader from '../BlockHeader';
 
 
-class Person extends PureComponent {
+class Material extends PureComponent {
   static propTypes = {
     list: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
     item: PropTypes.shape({ name: PropTypes.string }).isRequired,
     roleList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
-    handleCreatePerson: PropTypes.func.isRequired,
-    handleEditPerson: PropTypes.func.isRequired,
-    handleDeletePerson: PropTypes.func.isRequired,
+    handleCreateMaterial: PropTypes.func.isRequired,
+    handleEditMaterial: PropTypes.func.isRequired,
+    handleDeleteMaterial: PropTypes.func.isRequired,
     handleOnClickForAddButton: PropTypes.func.isRequired,
     currentPageState: PropTypes.string.isRequired,
-    onReadPersonList: PropTypes.func.isRequired,
+    onReadMaterialList: PropTypes.func.isRequired,
     onReadDepartmentList: PropTypes.func.isRequired,
     departmentList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
     onReadRoleList: PropTypes.func.isRequired,
-    onReadPerson: PropTypes.func.isRequired,
+    onReadMaterial: PropTypes.func.isRequired,
   };
 
   render() {
     const {
       list,
       item,
-      onReadPerson,
-      handleCreatePerson,
-      onReadPersonList,
+      onReadMaterial,
+      handleCreateMaterial,
+      onReadMaterialList,
       onReadDepartmentList,
       departmentList,
       onReadRoleList,
       roleList,
-      handleEditPerson,
-      handleDeletePerson,
+      handleEditMaterial,
+      handleDeleteMaterial,
       handleOnClickForAddButton,
       currentPageState,
     } = this.props;
@@ -60,23 +60,23 @@ class Person extends PureComponent {
     switch (currentPageState) {
       case 'list':
         components = (
-          <PersonList
-            onReadPersonList={onReadPersonList}
+          <MaterialList
+            onReadMaterialList={onReadMaterialList}
             list={list}
             handleOnClickForAddButton={handleOnClickForAddButton}
-            handleDeletePerson={handleDeletePerson}
+            handleDeleteMaterial={handleDeleteMaterial}
           />
         );
         break;
       case 'add':
         components = (
-          <PersonForm
+          <MaterialForm
             onReadDepartmentList={onReadDepartmentList}
             departmentList={departmentList}
             onReadRoleList={onReadRoleList}
             roleList={roleList}
-            onSubmit={handleCreatePerson}
-            handleDeletePerson={handleDeletePerson}
+            onSubmit={handleCreateMaterial}
+            handleDeleteMaterial={handleDeleteMaterial}
           />
         );
         break;
@@ -85,7 +85,7 @@ class Person extends PureComponent {
 
     return (
       <Container>
-        <BlockHeader title="Person" />
+        <BlockHeader title="Material" />
         <Row>
           <Col lg={12}>
             {components}
@@ -98,18 +98,18 @@ class Person extends PureComponent {
 
 function mapStateToProps(stateProps, ownProps) {
   return {
-    list: stateProps.person.list,
+    list: stateProps.material.list,
     departmentList: stateProps.department.list,
-    currentPageState: stateProps.person.currentPageState,
+    currentPageState: stateProps.material.currentPageState,
     roleList: stateProps.role.list,
-    item: stateProps.person.item,
+    item: stateProps.material.item,
   };
 }
 
 function mapDispatchToProps(dispatch, dispatchProps) {
   return {
-    onReadPersonList() {
-      return dispatch(readPersonList());
+    onReadMaterialList() {
+      return dispatch(readMaterialList());
     },
     onReadDepartmentList() {
       return dispatch(readDepartmentList());
@@ -117,20 +117,20 @@ function mapDispatchToProps(dispatch, dispatchProps) {
     onReadRoleList(departmentId) {
       return dispatch(readRoleList(departmentId));
     },
-    onReadPerson(id) {
-      return dispatch(readPerson(id));
+    onReadMaterial(id) {
+      return dispatch(readMaterial(id));
     },
-    handleCreatePerson(data) {
-      return dispatch(createPerson(data));
+    handleCreateMaterial(data) {
+      return dispatch(createMaterial(data));
     },
-    handleEditPerson(data) {
-      return dispatch(createPerson(data));
+    handleEditMaterial(data) {
+      return dispatch(createMaterial(data));
     },
-    handleDeletePerson(id) {
-      return dispatch(deletePerson(id));
+    handleDeleteMaterial(id) {
+      return dispatch(deleteMaterial(id));
     },
     handleOnClickForAddButton() {
-      return dispatch(changePersonPageState('add'));
+      return dispatch(changeMaterialPageState('add'));
     },
   };
 }
@@ -143,4 +143,4 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Person);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Material);

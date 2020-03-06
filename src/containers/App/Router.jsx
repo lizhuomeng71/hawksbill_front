@@ -7,6 +7,9 @@ import Auth from '../Auth/index';
 import Task from '../Task/index';
 import Person from '../Person/index';
 import Department from '../Department/index';
+import Equipment from '../Equipment/index';
+import Material from '../Material/index';
+
 import Role from '../Role/index';
 
 const wrappedRoutes = () => (
@@ -16,8 +19,9 @@ const wrappedRoutes = () => (
       <Route path="/person" component={Person} />
       <Route path="/task" component={Task} />
       <Route path="/department" component={Department} />
+      <Route path="/equipment" component={Equipment} />
+      <Route path="/material" component={Material} />
       <Route path="/role" component={Role} />
-
     </div>
   </div>
 );

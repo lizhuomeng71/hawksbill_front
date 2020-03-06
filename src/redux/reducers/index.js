@@ -10,6 +10,8 @@ import roleReducer from './roleReducer';
 import taskReducer from './taskReducer';
 import reviewReducer from './reviewReducer';
 import checkReducer from './checkReducer';
+import equipmentReducer from './equipmentReducer';
+import materialReducer from './materialReducer';
 
 
 const reducer = history => combineReducers({
@@ -23,6 +25,8 @@ const reducer = history => combineReducers({
   task: taskReducer,
   review: reviewReducer,
   check: checkReducer,
+  equipment: equipmentReducer,
+  material: materialReducer,
 
 });
 

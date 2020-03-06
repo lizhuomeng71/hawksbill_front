@@ -4,27 +4,27 @@ import { Card } from 'reactstrap';
 import ListHeader from '../../../shared/components/ListHeader';
 
 
-import PersonRow from './PersonRow';
+import EquipmentRow from './EquipmentRow';
 
-class PersonList extends PureComponent {
+class EquipmentList extends PureComponent {
   static propTypes = {
     list: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
-    onReadPersonList: PropTypes.func.isRequired,
-    handleDeletePerson: PropTypes.func.isRequired,
+    onReadEquipmentList: PropTypes.func.isRequired,
+    handleDeleteEquipment: PropTypes.func.isRequired,
     handleOnClickForAddButton: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
-    const { onReadPersonList } = this.props;
-    onReadPersonList();
+    const { onReadEquipmentList } = this.props;
+    onReadEquipmentList();
   }
 
   render() {
-    const { list, handleDeletePerson, handleOnClickForAddButton } = this.props;
+    const { list, handleDeleteEquipment, handleOnClickForAddButton } = this.props;
 
     return (
       <Card>
-        <ListHeader title="Person List" handleOnClickForAddButton={handleOnClickForAddButton} />
+        <ListHeader title="Equipment List" handleOnClickForAddButton={handleOnClickForAddButton} />
         <div className="body">
           <div className="table-responsive">
             <table className="table table-hover js-basic-example dataTable table-custom table-striped m-b-0 c_list">
@@ -42,7 +42,7 @@ class PersonList extends PureComponent {
                     </label>
                   </th>
                   <th>Name</th>
-                  <th>Person ID</th>
+                  <th>Equipment ID</th>
                   <th>Phone</th>
                   <th>Join Date</th>
                   <th>Role</th>
@@ -53,7 +53,7 @@ class PersonList extends PureComponent {
                 {list
                   .map((item) => {
                     return (
-                      <PersonRow item={item} handleDelete={handleDeletePerson} />
+                      <EquipmentRow item={item} handleDelete={handleDeleteEquipment} />
                     );
                   })}
               </tbody>
@@ -65,4 +65,4 @@ class PersonList extends PureComponent {
   }
 }
 
-export default PersonList;
+export default EquipmentList;

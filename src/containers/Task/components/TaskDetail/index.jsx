@@ -10,6 +10,8 @@ import TaskTimeLine from './components/TaskTimeLine';
 import TaskList from '../TaskList';
 import ReviewContainer from '../../../Review';
 import CheckContainer from '../../../Check';
+import EquipmentContainer from '../../../Equipment';
+import MaterialContainer from '../../../Material';
 
 export default class TaskDetail extends PureComponent {
   static propTypes = {
@@ -60,6 +62,8 @@ export default class TaskDetail extends PureComponent {
           <TaskTeam />
           <ReviewContainer />
           <TaskAssignment />
+          <EquipmentContainer />
+          <MaterialContainer />
         </Col>
         <Col lg="8" md="12">
           <TaskMain item={item} />
