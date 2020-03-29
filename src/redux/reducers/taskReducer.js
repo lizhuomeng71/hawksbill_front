@@ -4,7 +4,9 @@ import {
   READ_TASK_SUCCESS,
   READ_TASK_SUBTASK_LIST_SUCCESS,
   CREATE_TASK_SUCCESS,
+  CREATE_TASK_EQUIPMENT_SUCCESS,
   DELETE_TASK_SUCCESS,
+  DELETE_TASK_EQUIPMENT_SUCCESS,
 } from '../actions/taskActions';
 import {
   READ_REVIEW_LIST_SUCCESS,
@@ -14,7 +16,6 @@ const initialState = {
   list: [],
   item: {},
   subtaskList: [],
-  reviews: [],
 };
 
 export default function (state = initialState, action) {
@@ -45,10 +46,16 @@ export default function (state = initialState, action) {
           list: { $splice: [[index, 1]] },
         },
       );
-    case READ_REVIEW_LIST_SUCCESS:
+    case DELETE_TASK_EQUIPMENT_SUCCESS:
+      index = state.item.equipments.findIndex(i => i._id === action.payload);
+      console.log(index);
       return update(
         state, {
-          reviews: { $set: action.payload },
+          item: {
+            equipments: {
+              $splice: [[index, 1]],
+            },
+          },
         },
       );
     default:

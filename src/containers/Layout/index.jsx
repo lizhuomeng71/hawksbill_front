@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import Topbar from './topbar/Topbar';
 import Sidebar from './sidebar/Sidebar';
 
-import { changeThemeToDark, changeThemeToLight } from '../../redux/actions/themeActions';
 import { changeMobileSidebarVisibility, changeSidebarVisibility } from '../../redux/actions/sidebarActions';
 import { SidebarProps } from '../../shared/prop-types/ReducerProps';
 
@@ -26,15 +25,6 @@ class Layout extends Component {
     dispatch(changeMobileSidebarVisibility());
   };
 
-  changeToDark = () => {
-    const { dispatch } = this.props;
-    dispatch(changeThemeToDark());
-  };
-
-  changeToLight = () => {
-    const { dispatch } = this.props;
-    dispatch(changeThemeToLight());
-  };
 
   render() {
     const { sidebar } = this.props;

@@ -13,8 +13,6 @@ import renderDatePickerField from '../../../shared/components/form/DatePicker';
 
 class MaterialForm extends PureComponent {
   static propTypes = {
-    departmentList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
-    roleList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])).isRequired,
     handleSubmit: PropTypes.func.isRequired,
     reset: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
@@ -22,24 +20,13 @@ class MaterialForm extends PureComponent {
 
   componentDidMount() {
     const { onReadDepartmentList, onReadRoleList } = this.props;
-    onReadDepartmentList();
-    onReadRoleList();
-  }
-
-  handleDepartmentChange(event){
-    let departmentId = event.target.value
-    const { onReadRoleList } = this.props;
-    onReadRoleList(departmentId);
   }
 
   render() {
     const {
-      departmentList,
-      roleList,
       handleSubmit,
       reset,
       submitting,
-      onReadRoleList,
     } = this.props;
 
 
@@ -50,60 +37,23 @@ class MaterialForm extends PureComponent {
             <CardBody>
               <form className="form" onSubmit={handleSubmit}>
                 <Row>
-                  <Col lg="3" sm="12">
+                  <Col lg="9" sm="12">
                     <Field
-                      label="First Name"
-                      name="first_name"
+                      label="Name"
+                      name="name"
                       component={renderInputField}
                       placeholder="Material Name"
                     />
                   </Col>
                   <Col lg="3" sm="12">
                     <Field
-                      label="Last Name"
-                      name="last_name"
+                      label="Quantity"
+                      name="quantity"
                       component={renderInputField}
-                      placeholder="Material Name"
-                    />
-                  </Col>
-                  <Col md="3" sm="12">
-                    <Field
-                      label="Email"
-                      name="email"
-                      component={renderInputField}
-                      placeholder="Email"
-                    />
-                  </Col>
-                  <Col md="3" sm="12">
-                    <Field
-                      name="phone"
-                      label="Phone"
-                      placeholder="Phone"
-                      component={renderInputField}
-                    />
-                  </Col>
-                  <Col md="6" sm="12">
-                    <Field
-                      name="department"
-                      label="Department"
-                      component={renderSelectField}
-                      placeholder="Select Department"
-                      options={departmentList}
-                      onChange={this.handleDepartmentChange.bind(this)}
-                    />
-                  </Col>
-                  <Col md="6" sm="12">
-                    <Field
-                      name="role"
-                      label="Role"
-                      component={renderSelectField}
-                      placeholder="Select Role"
-                      options={roleList}
+                      placeholder="quantity"
                     />
                   </Col>
                 </Row>
-
-
                 <Row>
                   <Col lg="12">
                     <ButtonToolbar className="form__button-toolbar">

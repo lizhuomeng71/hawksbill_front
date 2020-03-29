@@ -10,8 +10,8 @@ import TaskTimeLine from './components/TaskTimeLine';
 import TaskList from '../TaskList';
 import ReviewContainer from '../../../Review';
 import CheckContainer from '../../../Check';
-import EquipmentContainer from '../../../Equipment';
-import MaterialContainer from '../../../Material';
+import TaskEquipmentContainer from './components/TaskEquipment';
+import TaskMaterialContainer from './components/TaskMaterial';
 
 export default class TaskDetail extends PureComponent {
   static propTypes = {
@@ -31,7 +31,11 @@ export default class TaskDetail extends PureComponent {
     const {
       match: { params },
     } = this.props;
-    const { onReadTask, onReadTaskSubTaskList, onReadReviewList } = this.props;
+    const {
+      onReadTask,
+      onReadTaskSubTaskList,
+      onReadReviewList,
+    } = this.props;
     onReadTask(params.id);
     onReadTaskSubTaskList(params.id);
   }
@@ -53,7 +57,6 @@ export default class TaskDetail extends PureComponent {
       item,
       subtaskList,
     } = this.props;
-    console.log(subtaskList);
     return (
       <Row>
         <Col lg="4" md="12">
@@ -62,8 +65,8 @@ export default class TaskDetail extends PureComponent {
           <TaskTeam />
           <ReviewContainer />
           <TaskAssignment />
-          <EquipmentContainer />
-          <MaterialContainer />
+          <TaskEquipmentContainer />
+          <TaskMaterialContainer />
         </Col>
         <Col lg="8" md="12">
           <TaskMain item={item} />

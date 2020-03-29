@@ -2,6 +2,10 @@ import { push } from 'react-router-redux';
 
 import taskApi from '../apis/taskApi';
 import * as HttpStatus from '../../shared/constants/HttpStatus';
+import {
+  changeTaskEquipmentMode,
+  changeTaskMaterialMode,
+} from './uiActions';
 
 export const READ_TASK_LIST_BEGIN = 'READ_TASK_LIST_BEGIN';
 export const READ_TASK_LIST_SUCCESS = 'READ_TASK_LIST_SUCCESS';
@@ -18,7 +22,18 @@ export const CREATE_TASK_FAIL = 'CREATE_TASK_FAIL';
 export const DELETE_TASK_BEGIN = 'DELETE_TASK_BEGIN';
 export const DELETE_TASK_SUCCESS = 'DELETE_TASK_SUCCESS';
 export const DELETE_TASK_FAIL = 'DELETE_TASK_FAIL';
-
+export const CREATE_TASK_EQUIPMENT_BEGIN = 'CREATE_TASK_EQUIPMENT_BEGIN';
+export const CREATE_TASK_EQUIPMENT_SUCCESS = 'CREATE_TASK_EQUIPMENT_SUCCESS';
+export const CREATE_TASK_EQUIPMENT_FAIL = 'CREATE_TASK_EQUIPMENT_FAIL';
+export const DELETE_TASK_EQUIPMENT_BEGIN = 'DELETE_TASK_EQUIPMENT_BEGIN';
+export const DELETE_TASK_EQUIPMENT_SUCCESS = 'DELETE_TASK_EQUIPMENT_SUCCESS';
+export const DELETE_TASK_EQUIPMENT_FAIL = 'DELETE_TASK_EQUIPMENT_FAIL';
+export const CREATE_TASK_MATERIAL_BEGIN = 'CREATE_TASK_MATERIAL_BEGIN';
+export const CREATE_TASK_MATERIAL_SUCCESS = 'CREATE_TASK_MATERIAL_SUCCESS';
+export const CREATE_TASK_MATERIAL_FAIL = 'CREATE_TASK_MATERIAL_FAIL';
+export const DELETE_TASK_MATERIAL_BEGIN = 'DELETE_TASK_MATERIAL_BEGIN';
+export const DELETE_TASK_MATERIAL_SUCCESS = 'DELETE_TASK_MATERIAL_SUCCESS';
+export const DELETE_TASK_MATERIAL_FAIL = 'DELETE_TASK_MATERIAL_FAIL';
 /* Read Task List Start */
 function readTaskListBegin() {
   return { type: READ_TASK_LIST_BEGIN };
@@ -193,3 +208,145 @@ export function deleteTask(key) {
 }
 
 /* Delete Task List End */
+
+
+/* Add Task Start */
+function createTaskEquipmentBegin() {
+  return { type: CREATE_TASK_EQUIPMENT_BEGIN };
+}
+
+function createTaskEquipmentSuccess(data) {
+  return { type: CREATE_TASK_EQUIPMENT_SUCCESS, payload: data };
+}
+
+function createTaskEquipmentFail(data) {
+  return { type: CREATE_TASK_EQUIPMENT_FAIL, payload: data };
+}
+
+export function createTaskEquipment(data) {
+  console.log(data);
+  return (dispatch) => {
+    dispatch(createTaskEquipmentBegin());
+    return taskApi.createTaskEquipment(data).then((response) => {
+      switch (response.status) {
+        case HttpStatus.CREATED:
+          dispatch(changeTaskEquipmentMode('list'));
+          dispatch(createTaskEquipmentSuccess(response.data));
+          break;
+        case HttpStatus.BAD_REQUEST:
+          dispatch(createTaskEquipmentFail(response.data));
+          break;
+        default:
+      }
+      return {};
+    }).catch((error) => {
+      throw (error);
+    });
+  };
+}
+/* Add Task End */
+
+/* Add Task Start */
+function deleteTaskEquipmentBegin() {
+  return { type: DELETE_TASK_EQUIPMENT_BEGIN };
+}
+
+function deleteTaskEquipmentSuccess(data) {
+  return { type: DELETE_TASK_EQUIPMENT_SUCCESS, payload: data };
+}
+
+function deleteTaskEquipmentFail(data) {
+  return { type: DELETE_TASK_EQUIPMENT_FAIL, payload: data };
+}
+
+export function deleteTaskEquipment(taskId, equipmentId) {
+  return (dispatch) => {
+    dispatch(deleteTaskEquipmentBegin());
+    return taskApi.deleteTaskEquipment(taskId, equipmentId).then((response) => {
+      switch (response.status) {
+        case HttpStatus.OK:
+          dispatch(deleteTaskEquipmentSuccess(response.data));
+          break;
+        case HttpStatus.BAD_REQUEST:
+          dispatch(deleteTaskEquipmentFail(response.data));
+          break;
+        default:
+      }
+      return {};
+    }).catch((error) => {
+      throw (error);
+    });
+  };
+}
+/* Add Task End */
+
+/* Add Task Start */
+function createTaskMaterialBegin() {
+  return { type: CREATE_TASK_MATERIAL_BEGIN };
+}
+
+function createTaskMaterialSuccess(data) {
+  return { type: CREATE_TASK_MATERIAL_SUCCESS, payload: data };
+}
+
+function createTaskMaterialFail(data) {
+  return { type: CREATE_TASK_MATERIAL_FAIL, payload: data };
+}
+
+export function createTaskMaterial(data) {
+  console.log(data);
+  return (dispatch) => {
+    dispatch(createTaskMaterialBegin());
+    return taskApi.createTaskMaterial(data).then((response) => {
+      switch (response.status) {
+        case HttpStatus.CREATED:
+          dispatch(changeTaskMaterialMode('list'));
+          dispatch(createTaskMaterialSuccess(response.data));
+          break;
+        case HttpStatus.BAD_REQUEST:
+          dispatch(createTaskMaterialFail(response.data));
+          break;
+        default:
+      }
+      return {};
+    }).catch((error) => {
+      throw (error);
+    });
+  };
+}
+/* Add Task End */
+
+/* Add Task Start */
+function deleteTaskMaterialBegin() {
+  return { type: DELETE_TASK_MATERIAL_BEGIN };
+}
+
+function deleteTaskMaterialSuccess(data) {
+  return { type: DELETE_TASK_MATERIAL_SUCCESS, payload: data };
+}
+
+function deleteTaskMaterialFail(data) {
+  return { type: DELETE_TASK_MATERIAL_FAIL, payload: data };
+}
+
+export function deleteTaskMaterial(data) {
+  console.log(data);
+  return (dispatch) => {
+    dispatch(deleteTaskMaterialBegin());
+    return taskApi.deleteTaskMaterial(data).then((response) => {
+      switch (response.status) {
+        case HttpStatus.OK:
+          dispatch(deleteTaskMaterialSuccess(response.data));
+          break;
+        case HttpStatus.BAD_REQUEST:
+          dispatch(deleteTaskMaterialFail(response.data));
+          break;
+        default:
+      }
+      return {};
+    }).catch((error) => {
+      throw (error);
+    });
+  };
+}
+/* Add Task End */

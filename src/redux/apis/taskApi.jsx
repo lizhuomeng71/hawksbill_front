@@ -18,7 +18,7 @@ class taskApi {
   }
 
   static readTaskSubTaskList(id) {
-    return axios.get(`${ApiConf.API_SERVER_ADDRESS}/tasks/${id}/sub_task`)
+    return axios.get(`${ApiConf.API_SERVER_ADDRESS}/tasks/${id}/sub_tasks`)
       .then(response => (response))
       .catch(error => (error));
   }
@@ -29,8 +29,33 @@ class taskApi {
       .catch(error => (error));
   }
 
+
   static deleteTask(key) {
     return axios.delete(`${ApiConf.API_SERVER_ADDRESS}/tasks/${key}`)
+      .then(response => (response))
+      .catch(error => (error));
+  }
+
+  static createTaskEquipment(data) {
+    return axios.post(`${ApiConf.API_SERVER_ADDRESS}/tasks/${data.taskId}/equipments`, data)
+      .then(response => (response))
+      .catch(error => (error));
+  }
+
+  static deleteTaskEquipment(taskId, equipmentId) {
+    return axios.delete(`${ApiConf.API_SERVER_ADDRESS}/tasks/${taskId}/equipments/${equipmentId}`)
+      .then(response => (response))
+      .catch(error => (error));
+  }
+
+  static createTaskMaterial(data) {
+    return axios.post(`${ApiConf.API_SERVER_ADDRESS}/tasks/${data.taskId}/materials`, data)
+      .then(response => (response))
+      .catch(error => (error));
+  }
+
+  static deleteTaskMaterial(taskId, materialId) {
+    return axios.delete(`${ApiConf.API_SERVER_ADDRESS}/tasks/${taskId}/materials/${materialId}`)
       .then(response => (response))
       .catch(error => (error));
   }

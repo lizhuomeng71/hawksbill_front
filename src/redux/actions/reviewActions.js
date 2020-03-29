@@ -140,6 +140,7 @@ function createReviewFail(data) {
 }
 
 export function createReview(data) {
+  console.log(data);
   return (dispatch) => {
     dispatch(createReviewBegin());
     return reviewApi.createReview(data).then((response) => {
